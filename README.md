@@ -143,7 +143,7 @@ python run_detect.py
 
 ### Run model export from a Python file
 
-> Requires export extras: `pip install "detect[export]"` (or `uv sync --extra export`).
+> Requires export extras based on the type of export needed.
 
 Create `run_export.py`:
 
