@@ -1,8 +1,17 @@
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
+
 [project]
 name = "detect-lib"
-version = "0.1.3"
+version = "0.1.4"
 description = "A modular video object detection toolkit with a clean det-v1 JSON schema, pluggable backends, and optional model export."
 readme = "README.md"
+
+[project.urls]
+Repository = "https://github.com/Surya-Rayala/VideoPipeline-detection.git"
+Issues = "https://github.com/Surya-Rayala/VideoPipeline-detection/issues"
+
 authors = [
     { name = "Surya Chand Rayala", email = "suryachand2k1@gmail.com" }
 ]
@@ -40,6 +49,12 @@ include = [
   "detect/**/*.py",
   "detect/registry/*.json",
   "detect/backends/**/registry.json",
+]
+exclude = [
+  "**/__pycache__/**",
+  "**/*.pyc",
+  "**/*.pyo",
+  "**/.DS_Store",
 ]
 
 [tool.hatch.build.targets.sdist]
