@@ -122,7 +122,7 @@ python -c "import detect; print(detect.available_detectors())"
 Create `run_detect.py`:
 
 ```python
-from detect.core.run import detect_video
+from detect import detect_video
 
 res = detect_video(
     video="in.mp4",
@@ -148,7 +148,7 @@ python run_detect.py
 Create `run_export.py`:
 
 ```python
-from detect.backends import export_model
+from detect import export_model
 
 res = export_model(
     weights="yolo26n",
@@ -283,7 +283,7 @@ uv run python -c "from ultralytics import YOLO; m=YOLO('models/exports/y26_trt/y
 - `--classes <ids>`: Filter to specific class IDs (comma/semicolon-separated), or omit for all classes.
 - `--conf-thresh <float>`: Confidence threshold for detections (default 0.25).
 - `--imgsz <int>`: Inference image size used by the backend (default 640).
-- `--device <str>`: Device selector (e.g., auto, cpu, mps, 0).
+- `--device <str>`: Device selector (e.g., `auto`, `cpu`, `mps`, `0`).
 - `--half`: Enable FP16 inference where supported.
 
 **Artifact saving (opt-in)**
@@ -319,8 +319,8 @@ uv run python -c "from ultralytics import YOLO; m=YOLO('models/exports/y26_trt/y
 **Export options**
 
 - `--formats <list>`: Comma/semicolon-separated export formats (default onnx).
-- `--imgsz <int|H,W>`: Export image size as an int or H,W pair (default 640).
-- `--device <str>`: Export device selector (e.g., cpu, mps, 0).
+- `--imgsz <int|H,W>`: Export image size as an int or `H,W` pair (default 640).
+- `--device <str>`: Export device selector (e.g., `cpu`, `mps`, `0`).
 - `--half`: Enable FP16 export where supported.
 - `--int8`: Enable INT8 quantization (format/toolchain-dependent).
 - `--data <yaml>`: Dataset YAML for INT8 calibration (when required).
