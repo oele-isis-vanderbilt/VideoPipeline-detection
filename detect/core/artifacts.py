@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 
-@dataclass(frozen=True)
+@dataclass
 class ArtifactOptions:
     """
     Controls what artifacts are written to disk.
@@ -36,7 +36,7 @@ class ArtifactOptions:
     save_video: bool = False
 
     # Where to save (only used if any save_* is True)
-    out_dir: Path = Path("out")
+    out_dir: str = "out"
     run_name: Optional[str] = None
 
     # Frames
@@ -86,7 +86,7 @@ def compute_run_dirs(
       {"run_dir": Path, "frames_dir": Path}
     """
     run_name = artifacts.run_name or f"{video_path.stem}_{detector_name}"
-    run_dir = artifacts.out_dir / run_name
+    run_dir = Path(artifacts.out_dir) / run_name
     frames_dir = run_dir / artifacts.frames_subdir
     return {"run_dir": run_dir, "frames_dir": frames_dir}
 

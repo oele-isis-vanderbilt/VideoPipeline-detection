@@ -79,6 +79,13 @@ def detect_video(
     models_dir: Union[str, Path] = "models",
     download_models: bool = True,
     artifacts: Optional[ArtifactOptions] = None,
+    # --- unified convenience toggles (all opt-in; default is "save nothing") ---
+    save_json: Optional[bool] = None,
+    save_frames: Optional[bool] = None,
+    save_video: Optional[str] = None,
+    out_dir: Optional[Union[str, Path]] = None,
+    run_name: Optional[str] = None,
+    progress: Optional[bool] = None,
 ) -> DetectResult:
     """
     Run detection on a video and return a DetectResult.
@@ -93,10 +100,51 @@ def detect_video(
       - display: show live window (press 'q' to quit early)
 
     If no artifacts are requested, no directories are created.
+
+    You may also pass convenience kwargs (recommended for simple usage):
+      - save_json: bool
+      - save_frames: bool
+      - save_video: filename (e.g., "annotated.mp4")
+      - out_dir: output root (only used if saving)
+      - run_name: run folder name (only used if saving)
+      - progress: enable/disable tqdm (defaults to ArtifactOptions)
+
+    Do not pass both `artifacts=` and any convenience kwargs.
     """
     _require_cv2()
 
-    artifacts = artifacts or ArtifactOptions()
+    # --- ArtifactOptions is the canonical internal representation ---
+    # By default, nothing is saved unless explicitly requested.
+    convenience_used = any(
+        x is not None for x in (save_json, save_frames, save_video, out_dir, run_name, progress)
+    )
+    if artifacts is not None and convenience_used:
+        raise TypeError(
+            "Pass either `artifacts=...` OR convenience args (save_json/save_frames/save_video/out_dir/run_name/progress), not both."
+        )
+
+    if artifacts is None:
+        artifacts = ArtifactOptions()
+
+        if save_json is not None:
+            artifacts.save_json = bool(save_json)
+        if save_frames is not None:
+            artifacts.save_frames = bool(save_frames)
+
+        if save_video is not None:
+            name = str(save_video).strip()
+            if name:
+                artifacts.save_video = True
+                artifacts.save_video_name = name
+            else:
+                artifacts.save_video = False
+
+        if out_dir is not None:
+            artifacts.out_dir = str(out_dir)
+        if run_name is not None:
+            artifacts.run_name = str(run_name)
+        if progress is not None:
+            artifacts.progress = bool(progress)
 
     src_path = Path(video)
     if not src_path.exists():
