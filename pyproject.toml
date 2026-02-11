@@ -1,6 +1,6 @@
 [project]
 name = "detect-lib"
-version = "0.1.2"
+version = "0.1.3"
 description = "A modular video object detection toolkit with a clean det-v1 JSON schema, pluggable backends, and optional model export."
 readme = "README.md"
 authors = [
@@ -33,6 +33,13 @@ dev = [
     "mypy>=1.19.1",
     "pytest>=9.0.2",
     "ruff>=0.15.0",
+]
+
+[tool.hatch.build.targets.wheel]
+include = [
+  "detect/**/*.py",
+  "detect/registry/*.json",
+  "detect/backends/**/registry.json",
 ]
 
 [tool.hatch.build.targets.sdist]
