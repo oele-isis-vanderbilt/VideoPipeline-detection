@@ -34,7 +34,7 @@ Current backend:
 ### Install
 
 ```bash
-pip install detect
+pip install detect-lib
 ```
 
 ### Optional dependencies (pip extras)
@@ -42,25 +42,25 @@ pip install detect
 Export helpers (ONNX + ONNXRuntime):
 
 ```bash
-pip install "detect[export]"
+pip install "detect-lib[export]"
 ```
 
 TensorFlow export paths (heavy):
 
 ```bash
-pip install "detect[tf]"
+pip install "detect-lib[tf]"
 ```
 
 OpenVINO export:
 
 ```bash
-pip install "detect[openvino]"
+pip install "detect-lib[openvino]"
 ```
 
 CoreML export (macOS):
 
 ```bash
-pip install "detect[coreml]"
+pip install "detect-lib[coreml]"
 ```
 
 ---
@@ -109,7 +109,7 @@ python -m detect.cli.export_model \
 
 ## Python usage (import)
 
-You can use `detect` as a library after installing with pip.
+You can use `detect` as a library after installing `detect-lib` with pip.
 
 ### Quick sanity check
 
@@ -143,7 +143,7 @@ python run_detect.py
 
 ### Run model export from a Python file
 
-> Requires export extras based on the type of export needed.
+> Requires export extras based on the type of export needed (e.g., `pip install "detect-lib[export]"`).
 
 Create `run_export.py`:
 
