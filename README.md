@@ -288,8 +288,8 @@ uv --version
 ### Install dependencies
 
 ```bash
-git clone https://github.com/Surya-Rayala/VideoPipeline-detection.git
-cd VideoPipeline-detection
+git clone https://github.com/Surya-Rayala/VisionPipeline-detection.git
+cd VisionPipeline-detection
 uv sync
 ```
 
